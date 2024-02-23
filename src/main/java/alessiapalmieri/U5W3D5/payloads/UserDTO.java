@@ -9,7 +9,7 @@ public record UserDTO(
         @Size(min = 4, max = 30, message = "The name must be between 4 and 30 characters")
         String name,
         @NotEmpty(message = "Lastname is a required field!")
-        @Size(min = 4, max = 30, message = "The surname must be between 4 and 30 characters")
+        @Size(min = 4, max = 30, message = "The lastname must be between 4 and 30 characters")
         String lastname,
         @NotEmpty(message = "The email is a required field!")
         @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "The email entered is invalid")
