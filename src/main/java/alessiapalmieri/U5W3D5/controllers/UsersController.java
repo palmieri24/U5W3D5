@@ -24,6 +24,4 @@ public class UsersController {
     public User getUser(@AuthenticationPrincipal User user) {
         return user;
     }
-    @GetMapping("/me/bookings")
-    public List<Booking> getUserBookings(@AuthenticationPrincipal User user){return user.getBookingList();}
 }
