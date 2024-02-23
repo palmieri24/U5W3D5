@@ -1,6 +1,8 @@
 package alessiapalmieri.U5W3D5.services;
 
+import alessiapalmieri.U5W3D5.Enum.Role;
 import alessiapalmieri.U5W3D5.entities.User;
+import alessiapalmieri.U5W3D5.exceptions.BadRequestException;
 import alessiapalmieri.U5W3D5.exceptions.NotFoundException;
 import alessiapalmieri.U5W3D5.repositories.UsersDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +37,17 @@ public class UserService {
 
     public User findByEmail(String email) {
         return usersDAO.findByEmail(email).orElseThrow(() -> new NotFoundException("Email " + email + " not found!"));
+    }
+
+    public User updateRoleByToken(User user){
+        Role currentRole = user.getRole();
+        if(currentRole == Role.USER){
+            user.setRole(Role.ADMIN);
+        } else if (currentRole == Role.ADMIN){
+            user.setRole(Role.USER);
+        } else {
+            throw new BadRequestException(("Choose between USER or ADMIN role!"));
+        }
+        return usersDAO.save(user);
     }
 }
